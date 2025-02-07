@@ -37,14 +37,17 @@ dependencies {
 
     implementation group: 'org.jsoup', name: 'jsoup', version: jsoupVersion
 
-    // BDD: Cucumber - Serenity
-    implementation("net.serenity-bdd:serenity-core:${serenityVersion}")
-    testImplementation("net.serenity-bdd:serenity-cucumber:${serenityVersion}")
-    testImplementation("net.serenity-bdd:serenity-rest-assured:${serenityVersion}")
-    testImplementation "org.junit.vintage:junit-vintage-engine:${junitVersion}"
+    // BDD: Cucumber - Serenity (Última versión estable)
+    implementation "net.serenity-bdd:serenity-core:4.0.15"
+    testImplementation "net.serenity-bdd:serenity-cucumber:4.0.15"
+    testImplementation "net.serenity-bdd:serenity-rest-assured:4.0.15"
+    testImplementation "org.junit.vintage:junit-vintage-engine:5.10.0"
+
+    // Actualizar Selenium a la última versión
+    implementation "org.seleniumhq.selenium:selenium-java:4.18.1"
 
     // Assertions
-    testImplementation group: 'org.assertj', name: 'assertj-core', version: assertjVersion
+    testImplementation "org.assertj:assertj-core:3.24.2"
 }
 
 test {
