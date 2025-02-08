@@ -9,5 +9,5 @@ Feature: Flight search on Vueling
     Given I am on the Vueling homepage
     When I search for a flight with the following details:
       | Origin  | Destination | Date      | Trip Type | Passengers |
-      | Madrid  | Barcelona   | 2025-06-01 | One-way   | 1          |
+      | Madrid  | Barcelona   | 01/06/2025 | One-way   | 1          |
     Then I see available flights in the search results

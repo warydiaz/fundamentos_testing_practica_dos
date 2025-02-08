@@ -1,12 +1,18 @@
 package es.s2o.selenium.pages;
 
+import es.s2o.selenium.domain.FlightSearchDTO;
 import es.s2o.selenium.domain.ReservationDTO;
+import net.serenitybdd.core.annotations.findby.By;
 import net.serenitybdd.core.annotations.findby.FindBy;
 import net.serenitybdd.core.pages.WebElementFacade;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.lang.invoke.MethodHandles;
+import java.time.Duration;
 
 
 public class VuelingPage extends PageObjectBase {
@@ -18,30 +24,25 @@ public class VuelingPage extends PageObjectBase {
 
     // With Selenium PageObject a WebElement without a @FindBy is like findById,
     // where the id is the name of the field
-    private WebElementFacade txtPhone;
-    private WebElementFacade txtEmail;
-    private WebElementFacade txtDate;
-    private WebElementFacade txtNumber;
-    private WebElementFacade txtSearch;
-    private WebElementFacade txtColor;
-    private WebElementFacade btnSave;
+    private WebElementFacade flight_origin1;
+    private WebElementFacade flight_destiny1;
+    private WebElementFacade flight_round_date1;
+    private WebElementFacade flight_return_date1;
+    @FindBy(id = "ticketops-seeker-button")
+    private WebElementFacade ticketops_seeker_button;
+    @FindBy(xpath = "//*[@id='ticketops-seeker-menu']/*[2]")
+    private WebElementFacade one_way;
+    private WebElementFacade buttonSubmit1;
 
-    private WebElementFacade display;
-    private WebElementFacade display_txtName;
+    public void registerFlight(FlightSearchDTO flightSearchDTO) {
+        LOGGER.debug("registerFlight starts, flightSearchDTO: [{}]", flightSearchDTO);
 
-    public void registerReservation(ReservationDTO reservation) {
-        LOGGER.debug("registerReservation starts, reservation: [{}]", reservation);
-
-        typeInto(txtName, reservation.getName());
-        typeInto(txtPhone, reservation.getPhone());
-        typeInto(txtEmail, reservation.getEmail());
-        typeInto(txtDate, reservation.getDate());
-        display.click();
-        typeInto(txtNumber, reservation.getNumber());
-        typeInto(txtSearch, reservation.getTime());
-        display.click();
-        evaluateJavascript("arguments[0].value=arguments[1];", txtColor, reservation.getColor());
-        btnSave.click();
+        typeInto(flight_origin1, flightSearchDTO.getOrigin());
+        typeInto(flight_destiny1, flightSearchDTO.getDestination());
+        ticketops_seeker_button.click();
+        one_way.click();
+        typeInto(flight_round_date1, flightSearchDTO.getDate());
+        buttonSubmit1.click();
     }
 
     private String getHiddenValue(){

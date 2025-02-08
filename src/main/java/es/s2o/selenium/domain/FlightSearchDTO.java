@@ -9,6 +9,15 @@ public class FlightSearchDTO {
     private int passengers;
 
     public FlightSearchDTO() {
+        // Constructor vacío necesario para la deserialización
+    }
+
+    public FlightSearchDTO(String origin, String destination, String date, String tripType, int passengers) {
+        this.origin = origin;
+        this.destination = destination;
+        this.date = date;
+        this.tripType = tripType;
+        this.passengers = passengers;
     }
 
     public String getOrigin() {

@@ -1,6 +1,7 @@
 package es.s2o.selenium.stepsdefs.vueling;
 
 import es.s2o.selenium.domain.FlightSearchDTO;
+import es.s2o.selenium.pages.VuelingListPage;
 import es.s2o.selenium.pages.VuelingPage;
 import io.cucumber.datatable.DataTable;
 import io.cucumber.java.After;
@@ -19,12 +20,10 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-/**
- * Created by sacrists on 26.02.17.
- */
 public class VuelingStepdefs {
     private static final Logger LOGGER = LoggerFactory.getLogger(MethodHandles.lookup().lookupClass());
     private VuelingPage vuelingPage;
+    private VuelingListPage vuelingListPage;
 
     private static final String WEB_ROOT = "WEB_ROOT";
     private static final String HOME = "reservationList.html";
@@ -48,8 +47,11 @@ public class VuelingStepdefs {
     }
 
     @When("I search for a flight with the following details:")
-    public void i_search_for_a_flight_with_the_following_details(DataTable dataTable) throws Throwable {
+    public void i_search_for_a_flight_with_the_following_details(List<FlightSearchDTO> flightSearchDTOS) throws Throwable {
         LOGGER.debug("i_search_for_a_flight_with_the_following_details");
+        flightSearchDTOS.forEach(
+                flightSearch -> vuelingListPage.addFlight(flightSearch)
+        );
 
         throw new io.cucumber.java.PendingException();
     }
